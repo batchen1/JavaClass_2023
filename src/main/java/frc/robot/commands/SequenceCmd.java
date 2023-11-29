@@ -6,6 +6,7 @@ import frc.robot.subsystems.Printer;
 public class SequenceCmd extends CommandBase{
     private Printer printer;
     private int number;
+    private int counter = 1;
     
     public SequenceCmd (Printer p, int n){
         p = printer;
@@ -17,18 +18,20 @@ public class SequenceCmd extends CommandBase{
     }
     @Override
     public void execute() {
-        int counter = 1;
         if (number >= 10 && number <=100 && counter <= number) {
             printer.printNum(counter);
-            counter++;
         }
     }
 
     @Override
     public boolean isFinished() {
-        return true;
+        if (counter == number){
+            return true;
+    }else {
+        counter++;
+        return false;
     }
-
+}
     @Override
     public void end(boolean interrupted) {
     }
