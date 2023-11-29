@@ -3,14 +3,17 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot;
-
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.PrintCmd;
+import frc.robot.commands.PrintTwoCharsCmd;
+import frc.robot.commands.SequenceCmd;
 import frc.robot.commands.StreamCmd;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.NumberPrinter;
 import frc.robot.subsystems.Printer;
+import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
@@ -28,6 +31,8 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final Printer printer = new Printer();
+  private final NumberPrinter numberPrinter = new NumberPrinter();
+  private final Counter counter = new Counter();
   private Joystick joystick = new Joystick(0);
 
 
@@ -51,9 +56,11 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    new JoystickButton(joystick, 1).onTrue(new PrintCmd(printer, 'a'));  
+    new JoystickButton(joystick, 4).onTrue(new SequenceCmd(numberPrinter, 43));
+    //new JoystickButton(joystick, 4).onTrue(new PrintTwoCharsCmd(printer, 'l', 'k'));  
+    new JoystickButton(joystick, 3).onTrue(new PrintCmd(printer, 'a'));  
     new JoystickButton(joystick, 2).onTrue(new PrintCmd(printer, 'b'));
-    new JoystickButton(joystick, 3).onTrue(new StreamCmd(printer, 'c', 2));
+    new JoystickButton(joystick, 1).onTrue(new StreamCmd(printer, 'd', 4));
   }
 
   /**
