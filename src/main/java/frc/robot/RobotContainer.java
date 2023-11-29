@@ -5,18 +5,29 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.AddCounterCmd;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.PrintCmd;
+import frc.robot.commands.PrintsTwoCharsCmd;
 import frc.robot.commands.StreamCmd;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Printer;
+import frc.robot.subsystems.Counter;
+
+import javax.sound.midi.Sequence;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.commands.printD;
+import frc.robot.commands.PrintsTwoCharsCmd;
+import frc.robot.commands.SequenceCmd;
+import frc.robot.commands.AddCounterCmd;
+import frc.robot.commands.printCounter;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -28,7 +39,9 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final Printer printer = new Printer();
+  private final Counter counter = new Counter();
   private Joystick joystick = new Joystick(0);
+  private Joystick joystick2 = new Joystick(1);
 
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
@@ -51,9 +64,11 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    new JoystickButton(joystick, 1).onTrue(new PrintCmd(printer, 'a'));  
-    new JoystickButton(joystick, 2).onTrue(new PrintCmd(printer, 'b'));
-    new JoystickButton(joystick, 3).onTrue(new StreamCmd(printer, 'c', 2));
+    new JoystickButton(joystick, 1).onTrue(new printD(printer));  
+    new JoystickButton(joystick, 2).onTrue(new PrintsTwoCharsCmd(printer, 'a', 'b'));
+    new JoystickButton(joystick, 3).onTrue(new SequenceCmd(printer, 30));
+    new JoystickButton(joystick, 4).onTrue(new AddCounterCmd(counter));
+    new JoystickButton(joystick2, 1).onTrue(new printCounter(printer,counter));
   }
 
   /**
