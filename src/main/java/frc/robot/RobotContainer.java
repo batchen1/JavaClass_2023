@@ -8,6 +8,8 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.PrintCmd;
+import frc.robot.commands.PrintTwoCharsCmd;
+import frc.robot.commands.SequenceCmd;
 import frc.robot.commands.StreamCmd;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Printer;
@@ -51,9 +53,10 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    new JoystickButton(joystick, 1).onTrue(new PrintCmd(printer, 'a'));  
-    new JoystickButton(joystick, 2).onTrue(new PrintCmd(printer, 'b'));
+    new JoystickButton(joystick, 1).onTrue(new PrintCmd(printer, 'z'));  
+    new JoystickButton(joystick, 2).onTrue(new PrintTwoCharsCmd(printer, 'A', 'B'));
     new JoystickButton(joystick, 3).onTrue(new StreamCmd(printer, 'c', 2));
+    new JoystickButton(joystick, 4).onTrue(new SequenceCmd(printer, 55));
   }
 
   /**
