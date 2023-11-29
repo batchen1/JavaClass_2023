@@ -5,10 +5,16 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.AddCounterCmd;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.PrintCmd;
+import frc.robot.commands.PrintTwoCharsCmd;
 import frc.robot.commands.StreamCmd;
+import frc.robot.commands.printCounter;
+import frc.robot.commands.SequenceCmd;
+import frc.robot.commands.AddCounterCmd;
+import frc.robot.subsystems.Counter;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Printer;
 import edu.wpi.first.wpilibj.Joystick;
@@ -28,6 +34,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final Printer printer = new Printer();
+  private final Counter counter = new Counter();
   private Joystick joystick = new Joystick(0);
 
 
@@ -51,9 +58,11 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    new JoystickButton(joystick, 1).onTrue(new PrintCmd(printer, 'a'));  
-    new JoystickButton(joystick, 2).onTrue(new PrintCmd(printer, 'b'));
-    new JoystickButton(joystick, 3).onTrue(new StreamCmd(printer, 'c', 2));
+    new JoystickButton(joystick, 1).onTrue(new StreamCmd(printer, 'd', 4));  
+    new JoystickButton(joystick, 2).onTrue(new PrintTwoCharsCmd(printer, 'a', 'b'));
+    // new JoystickButton(joystick, 3).onTrue(new SequenceCmd(printer, 25));    -- this is problem 5, only had 4 joysticks but 5 commands to bind
+    new JoystickButton(joystick, 3).onTrue(new AddCounterCmd(counter));
+    new JoystickButton(joystick, 4).onTrue(new printCounter(printer, counter));
   }
 
   /**

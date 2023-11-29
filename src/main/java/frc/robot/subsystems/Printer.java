@@ -6,4 +6,7 @@ public class Printer extends SubsystemBase{
     public void printChar(char c) {
         System.out.print(c);
     }
+    public void printInt(int c) {
+        System.out.print(c);
+    }
 }
