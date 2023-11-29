@@ -51,9 +51,9 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    new JoystickButton(joystick, 1).onTrue(new PrintCmd(printer, 'a'));  
+    new JoystickButton(joystick, 1).onTrue(new PrintCmd(printer, 'd'));  
     new JoystickButton(joystick, 2).onTrue(new PrintCmd(printer, 'b'));
-    new JoystickButton(joystick, 3).onTrue(new StreamCmd(printer, 'c', 2));
+    new JoystickButton(joystick, 3).onTrue(new StreamCmd(printer, 'd', 4));
   }
 
   /**
